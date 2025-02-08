@@ -48,7 +48,7 @@ impl Keypair {
   }
 
   /// Quick hack to pass in a seed
-  pub fn generate_from_seed(seed: &[u8]) -> Keypair {
+  pub fn from_bytes(seed: &[u8; 32]) -> Keypair {
     let mut public = [0u8; PUBLICKEYBYTES];
     let mut secret = [0u8; SECRETKEYBYTES];
     crypto_sign_keypair(&mut public, &mut secret, Some(seed));
