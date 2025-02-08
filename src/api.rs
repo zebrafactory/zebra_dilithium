@@ -47,7 +47,15 @@ impl Keypair {
     Keypair { public, secret }
   }
 
-  /// Quick hack to pass in a seed
+  /// Creates a keypair using the provided seed bytes.
+  ///
+  /// Example:
+  /// ```
+  /// # use pqc_dilithium::*;
+  /// let seed = [42; 32];
+  /// let keys = Keypair::from_bytes(&seed);
+  /// assert!(keys.public.len() == PUBLICKEYBYTES);
+  /// assert!(keys.expose_secret().len() == SECRETKEYBYTES);
   pub fn from_bytes(seed: &[u8; 32]) -> Keypair {
     let mut public = [0u8; PUBLICKEYBYTES];
     let mut secret = [0u8; SECRETKEYBYTES];
