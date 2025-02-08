@@ -51,4 +51,3 @@ wasm = ["wasm-bindgen", "getrandom/js"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-
