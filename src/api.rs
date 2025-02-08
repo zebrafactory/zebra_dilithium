@@ -63,7 +63,6 @@ impl Keypair {
     Keypair { public, secret }
   }
 
-
   /// Generates a signature for the given message using a keypair
   ///
   /// Example:
