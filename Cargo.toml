@@ -3,13 +3,13 @@ name = "pqc_dilithium"
 version = "0.2.0"
 authors = ["Mitchell Berry <foss@mitchellberry.com>"]
 description = "A post-quantum cryptographic signature scheme based on the hardness of lattice problems over module lattices"
-edition = "2018"
+edition = "2021"
 categories = ["cryptography"]
 keywords = ["signature", "post-quantum", "signing"]
 repository = "https://github.com/Argyle-Software/dilithium/"
 license = "MIT OR Apache-2.0"
 exclude = ["tests/KAT"]
-rust-version = "1.50"
+rust-version = "1.56"
 
 [dependencies]
 rand_core = { version = "0.6.4",  default-features = false }
