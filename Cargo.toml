@@ -24,7 +24,7 @@ features = ["getrandom"]
 pqc_core = {version = "0.3.0", features = ["load"]}
 
 [target.'cfg(bench)'.dev-dependencies.criterion]
-criterion = "0.4.0"
+version = "0.4.0"
 
 [[bench]]
 name = "api"

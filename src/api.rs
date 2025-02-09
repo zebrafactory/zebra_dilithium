@@ -1,4 +1,4 @@
-use crate::params::{PUBLICKEYBYTES, SECRETKEYBYTES, SIGNBYTES};
+use crate::params::{PUBLICKEYBYTES, SECRETKEYBYTES, SEEDBYTES, SIGNBYTES};
 use crate::sign::*;
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
@@ -44,6 +44,23 @@ impl Keypair {
     let mut public = [0u8; PUBLICKEYBYTES];
     let mut secret = [0u8; SECRETKEYBYTES];
     crypto_sign_keypair(&mut public, &mut secret, None);
+    Keypair { public, secret }
+  }
+
+  /// Creates a keypair using the provided seed bytes.
+  ///
+  /// Example:
+  /// ```
+  /// # use pqc_dilithium::*;
+  /// let seed = [42; SEEDBYTES];
+  /// let keys = Keypair::from_bytes(&seed);
+  /// assert!(keys.public.len() == PUBLICKEYBYTES);
+  /// assert!(keys.expose_secret().len() == SECRETKEYBYTES);
+  /// ```
+  pub fn from_bytes(seed: &[u8; SEEDBYTES]) -> Keypair {
+    let mut public = [0u8; PUBLICKEYBYTES];
+    let mut secret = [0u8; SECRETKEYBYTES];
+    crypto_sign_keypair(&mut public, &mut secret, Some(seed));
     Keypair { public, secret }
   }
 
