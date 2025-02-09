@@ -1,7 +1,8 @@
 use crate::{
-  fips202::*, packing::*, params::*, poly::*, polyvec::*, randombytes::*,
+  fips202::*, packing::*, params::*, poly::*, polyvec::*,
   SignError,
 };
+use getrandom;
 
 pub fn crypto_sign_keypair(
   pk: &mut [u8],
@@ -90,7 +91,7 @@ pub fn crypto_sign_signature(sig: &mut [u8], m: &[u8], sk: &[u8]) {
   shake256_squeeze(&mut keymu[SEEDBYTES..], CRHBYTES, &mut state);
 
   if RANDOMIZED_SIGNING {
-    randombytes(&mut rhoprime, CRHBYTES);
+    getrandom::fill(&mut rhoprime[0..CRHBYTES]).unwrap(); // FIXME: propigate error
   } else {
     shake256(&mut rhoprime, CRHBYTES, &keymu, SEEDBYTES + CRHBYTES);
   }

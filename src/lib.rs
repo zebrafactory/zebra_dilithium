@@ -7,7 +7,6 @@ mod packing;
 mod params;
 mod poly;
 mod polyvec;
-mod randombytes;
 mod reduce;
 mod rounding;
 mod sign;
