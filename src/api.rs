@@ -52,7 +52,7 @@ impl Keypair {
   /// Example:
   /// ```
   /// # use pqc_dilithium::*;
-  /// let seed = [42; 32];
+  /// let seed = [42; SEEDBYTES];
   /// let keys = Keypair::from_bytes(&seed);
   /// assert!(keys.public.len() == PUBLICKEYBYTES);
   /// assert!(keys.expose_secret().len() == SECRETKEYBYTES);
