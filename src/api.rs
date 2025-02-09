@@ -1,5 +1,6 @@
 use crate::params::{PUBLICKEYBYTES, SECRETKEYBYTES, SEEDBYTES, SIGNBYTES};
 use crate::sign::*;
+use getrandom;
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Keypair {
@@ -41,10 +42,9 @@ impl Keypair {
   /// assert!(keys.expose_secret().len() == SECRETKEYBYTES);
   /// ```
   pub fn generate() -> Keypair {
-    let mut public = [0u8; PUBLICKEYBYTES];
-    let mut secret = [0u8; SECRETKEYBYTES];
-    crypto_sign_keypair(&mut public, &mut secret, None);
-    Keypair { public, secret }
+    let mut seed = [0; SEEDBYTES];
+    getrandom::fill(&mut seed).unwrap(); // FIXME: should really propigate getrandom::Error
+    Self::from_bytes(&seed)
   }
 
   /// Creates a keypair using the provided seed bytes.
