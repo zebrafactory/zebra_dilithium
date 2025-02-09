@@ -8,7 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RUSTFLAGS: '--cfg getrandom_backend="wasm_js"'
+  RUSTFLAGS: --cfg getrandom_backend="wasm_js"
 
 jobs:
   build:
