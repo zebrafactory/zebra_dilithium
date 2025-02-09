@@ -7,7 +7,7 @@ pub fn crypto_sign_keypair(
   pk: &mut [u8],
   sk: &mut [u8],
   seed: &[u8; SEEDBYTES],
-) -> u8 {
+) {
   let mut seedbuf = [0u8; 2 * SEEDBYTES + CRHBYTES];
   let mut tr = [0u8; SEEDBYTES];
   let (mut rho, mut rhoprime, mut key) =
@@ -55,8 +55,6 @@ pub fn crypto_sign_keypair(
   // Compute H(rho, t1) and write secret key
   shake256(&mut tr, SEEDBYTES, pk, PUBLICKEYBYTES);
   pack_sk(sk, &rho, &tr, &key, &t0, &s1, &s2);
-
-  return 0;
 }
 
 pub fn crypto_sign_signature(sig: &mut [u8], m: &[u8], sk: &[u8]) {
