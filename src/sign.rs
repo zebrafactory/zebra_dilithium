@@ -6,13 +6,8 @@ use crate::{
 pub fn crypto_sign_keypair(
   pk: &mut [u8],
   sk: &mut [u8],
-  seed: Option<&[u8]>,
+  seed: &[u8; SEEDBYTES],
 ) -> u8 {
-  let mut init_seed = [0u8; SEEDBYTES];
-  match seed {
-    Some(x) => init_seed.copy_from_slice(x),
-    None => randombytes(&mut init_seed, SEEDBYTES),
-  };
   let mut seedbuf = [0u8; 2 * SEEDBYTES + CRHBYTES];
   let mut tr = [0u8; SEEDBYTES];
   let (mut rho, mut rhoprime, mut key) =
@@ -29,7 +24,7 @@ pub fn crypto_sign_keypair(
   shake256(
     &mut seedbuf,
     2 * SEEDBYTES + CRHBYTES,
-    &init_seed,
+    seed,
     SEEDBYTES,
   );
   rho.copy_from_slice(&seedbuf[..SEEDBYTES]);

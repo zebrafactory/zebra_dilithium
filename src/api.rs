@@ -60,7 +60,7 @@ impl Keypair {
   pub fn from_bytes(seed: &[u8; SEEDBYTES]) -> Keypair {
     let mut public = [0u8; PUBLICKEYBYTES];
     let mut secret = [0u8; SECRETKEYBYTES];
-    crypto_sign_keypair(&mut public, &mut secret, Some(seed));
+    crypto_sign_keypair(&mut public, &mut secret, seed);
     Keypair { public, secret }
   }
 
