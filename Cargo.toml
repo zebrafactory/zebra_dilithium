@@ -12,13 +12,13 @@ exclude = ["tests/KAT"]
 rust-version = "1.56"
 
 [dependencies]
-rand_core = { version = "0.6.4",  default-features = false }
-getrandom = {version = "0.2.10", features = ["js"], optional = true }
+rand_core = { version = "0.9.0",  default-features = false }
+getrandom = { version = "0.3.1", features = ["wasm_js"], optional = true }
 wasm-bindgen = { version = "0.2.87", optional = true }
 
 [dependencies.rand]
-version = "0.8.5"
-features = ["getrandom"]
+version = "0.9.0"
+features = ["os_rng"]
 
 [dev-dependencies]
 criterion = "0.5.1"
@@ -45,7 +45,7 @@ aes = []
 random_signing = []
 
 # For compiling to wasm targets 
-wasm = ["wasm-bindgen", "getrandom/js"]
+wasm = ["wasm-bindgen", "getrandom/wasm_js"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
