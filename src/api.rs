@@ -1,8 +1,9 @@
 use crate::params::{PUBLICKEYBYTES, SECRETKEYBYTES, SEEDBYTES, SIGNBYTES};
 use crate::sign::*;
 use getrandom;
+use zeroize::{Zeroize, ZeroizeOnDrop};
 
-#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Zeroize, ZeroizeOnDrop)]
 pub struct Keypair {
   pub public: [u8; PUBLICKEYBYTES],
   secret: [u8; SECRETKEYBYTES],
