@@ -25,7 +25,7 @@ fn keypair() {
     let sk = kat.sk.clone();
     let mut pk2 = [0u8; PUBLICKEYBYTES];
     let mut sk2 = [0u8; SECRETKEYBYTES];
-    crypto_sign_keypair(&mut pk2, &mut sk2, Some(&bufvec[i]));
+    crypto_sign_keypair(&mut pk2, &mut sk2, &bufvec[i][..].try_into().unwrap());
     assert_eq!(pk, pk2);
     assert_eq!(sk, sk2);
   }
